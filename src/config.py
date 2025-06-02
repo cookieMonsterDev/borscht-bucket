@@ -3,7 +3,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    directory_path: str
+    base_path: str
+    chunk_size: int
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 
