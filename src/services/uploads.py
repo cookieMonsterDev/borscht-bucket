@@ -1,12 +1,12 @@
-from re import sub
 from os import makedirs
+from re import sub, UNICODE
 from datetime import datetime
 from fastapi import UploadFile
 from shutil import copyfileobj
 from settings import get_settings
 from os.path import dirname, join
+from exceptions import HTTPException
 from fastapi.responses import JSONResponse
-from fastapi.exceptions import HTTPException
 from constants import Directories, PhotoMediaTypes, VideoMediaTypes
 from utils import generate_file_path, generate_file_media_type, Directories
 
@@ -15,7 +15,7 @@ settings = get_settings()
 
 def generate_file_slug(filename: str) -> str:
     (filename, extension) = filename.rsplit('.', 1)
-    filename = sub(r'[^a-zA-Z0-9]+', '-', filename.lower()).strip('-')
+    filename = sub(r'[^\w\d]+', '-', filename.lower(), flags=UNICODE).strip('-')
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     return f"{filename}-{timestamp}.{extension}"
 
@@ -50,7 +50,7 @@ async def upload_file(file: UploadFile) -> JSONResponse:
     try:
         with open(path, 'wb') as buffer:
             copyfileobj(file.file, buffer)
-    except Exception as e:
-        return JSONResponse({"message": "File uploaded successfully", "filename": url}, status_code=201)
+    except OSError as error:
+        raise HTTPException(message=error.strerror)
 
-    return JSONResponse({"message": "File uploaded successfully", "filename": url}, status_code=201)
+    return JSONResponse({"message": "File uploaded successfully", "url": url}, status_code=201)
