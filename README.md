@@ -3,7 +3,6 @@
 This project is a FastAPI-based Media Serve for uploading and serving media files — videos, photos, and documents. That was created for fun))
 
 
-
 ## 📖 Features
 
 - **File Uploads:** Upload media files using a simple POST endpoint.
