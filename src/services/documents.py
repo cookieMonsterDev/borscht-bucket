@@ -1,14 +1,18 @@
-from mimetypes import guess_type
+from os.path import exists
+from constants import Directories
 from fastapi.responses import FileResponse
-from utils import generate_file_path, validate_file_existence, Directories
+from fastapi.exceptions import HTTPException
+from utils import generate_file_path, generate_file_media_type
 
 
-async def get_document_by_slug(document_slug: str) -> FileResponse:
-    path = generate_file_path(document_slug, Directories.DOCUMENTS)
+async def get_document_by_slug(slug: str) -> FileResponse:
+    path = generate_file_path(slug, Directories.DOCUMENTS)
 
-    validate_file_existence(document_slug)
+    if not exists(path):
+        raise HTTPException(status_code=404, detail="Document not found")
 
-    media_type = guess_type(path)[0] or "application/octet-stream"
-    headers = {"Content-Disposition": f"attachment; filename={document_slug}"}
+    media_type = generate_file_media_type(path)
 
-    return FileResponse(path=path, media_type=media_type, headers=headers, filename=document_slug)
+    headers = {"Content-Disposition": f"attachment; filename={slug}"}
+
+    return FileResponse(path=path, media_type=media_type, headers=headers, filename=slug)

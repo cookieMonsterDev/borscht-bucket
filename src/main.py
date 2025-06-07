@@ -1,8 +1,6 @@
-from fastapi import Depends, FastAPI
-from typing_extensions import Annotated
-from config import Settings, get_settings
-from services import videos, photos, documents
+from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from services import uploads, videos, photos, documents
 
 
 app = FastAPI()
@@ -17,20 +15,20 @@ app.add_middleware(
 
 
 @app.post("/upload")
-async def upload(file: bytes):
-    return {"message": "File uploaded successfully."}
+async def upload(file: UploadFile):
+    return await uploads.upload_file(file)
 
 
-@app.get("/videos/{video_slug}")
-async def get_video(video_slug: str, settings: Annotated[Settings, Depends(get_settings)]):
-    return {"message": f"This is a video endpoint for {video_slug}."}
+@app.get("/videos/{slug}")
+async def get_video(slug: str):
+    return await videos.get_video_by_slug(slug)
 
 
-@app.get("/photos/{photo_slug}")
-async def get_doucment(photo_slug: str, settings: Annotated[Settings, Depends(get_settings)]):
-    return photos.get_photo_by_slug(document_slug=photo_slug)
+@app.get("/photos/{slug}")
+async def get_doucment(slug: str):
+    return await photos.get_photo_by_slug(slug)
 
 
-@app.get("/documents/{document_slug}")
-async def get_doucment(document_slug: str, settings: Annotated[Settings, Depends(get_settings)]):
-    return documents.get_document_by_slug(document_slug=document_slug)
+@app.get("/documents/{slug}")
+async def get_doucment(slug: str):
+    return await documents.get_document_by_slug(slug)
