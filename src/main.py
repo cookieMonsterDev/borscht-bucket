@@ -1,6 +1,6 @@
 import exceptions
 from settings import get_settings
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, Header, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from services import uploads, videos, photos, documents
 
@@ -27,8 +27,8 @@ async def upload(file: UploadFile):
 
 
 @app.get("/videos/{slug}")
-async def get_video(slug: str):
-    return await videos.get_video_by_slug(slug)
+async def get_video(slug: str, range_header: str = Header(None)):
+    return await videos.get_video_by_slug(slug, range_header)
 
 
 @app.get("/photos/{slug}")
