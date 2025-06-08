@@ -37,7 +37,6 @@ coverage.xml
 *.cover
 *.py,cover
 
-# FastAPI/Starlette specific
 instance/
 *.db
 *.sqlite3
@@ -48,12 +47,6 @@ instance/
 *.json
 *.yaml
 *.yml
-
-# VS Code
-.vscode/
-
-# PyCharm
-.idea/
 
 # mypy
 .mypy_cache/
@@ -73,6 +66,7 @@ instance/
 *.tar
 __docker_build__/
 docker-compose.override.yml
+!docker-compose.yml
 
 # Editable install artifacts
 *.egg-info/
