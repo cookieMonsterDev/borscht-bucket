@@ -49,7 +49,7 @@ CHUNK_SIZE = 4096
 5. Start app in the dev mode:
 
 ```bash
-fastapi dev ./src/main.py
+fastapi dev ./app/main.py
 ```
 
 ## 💾 Deployment with docker

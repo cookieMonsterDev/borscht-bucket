@@ -1,3 +1,22 @@
+[tool.poetry]
+name = "borscht-bucket"
+version = "0.0.1"
+description = "FastAPI-based Media Server for photos, videos and documents"
+authors = ["Mykhailo <mykhailo.toporkov@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+fastapi = "^0.115.12"
+uvicorn = {extras = ["standard"], version = "^0.34.2"}
+
+
+[tool.semantic_release]
+branch = "master"
+changelog_file = "CHANGELOG.md"
+commit_message = "chore(release): {version} [skip ci]\n\n{changelog}"
+tag_format = "v{version}"
+
 [tool.black]
 line-length = 120
 target-version = ['py310']
