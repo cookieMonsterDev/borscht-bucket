@@ -41,6 +41,7 @@ jobs:
       - name: Run semantic-release (to create tag only)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: semantic-release-bot
           GIT_AUTHOR_EMAIL: ci-bot@example.com
           GIT_COMMITTER_NAME: semantic-release-bot
