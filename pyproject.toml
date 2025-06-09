@@ -16,6 +16,14 @@ branch = "master"
 changelog_file = "CHANGELOG.md"
 commit_message = "chore(release): {version} [skip ci]\n\n{changelog}"
 tag_format = "v{version}"
+plugins = [
+    "semantic_release.history",
+    "semantic_release.info",
+    "semantic_release.create_release",
+    "semantic_release.vcs_helpers", 
+]
+first_release = true
+
 
 [tool.black]
 line-length = 120
