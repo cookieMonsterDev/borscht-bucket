@@ -1,0 +1,12 @@
+services:
+  borscht-bucket:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: borscht-bucket
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    volumes:
+      - /files:/files
