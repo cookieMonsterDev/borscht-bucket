@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install build and release dependencies
         run: |
@@ -32,6 +32,9 @@ jobs:
 
       - name: Install project dependencies (using poetry)
         run: poetry install --no-root
+
+      - name: Set working directory
+        run: cd $GITHUB_WORKSPACE
 
       - name: Run semantic-release (to create tag only)
         env:
