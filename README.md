@@ -48,7 +48,6 @@ CHUNK_SIZE = 4096
 fastapi dev ./src/main.py
 ```
 
-
 ## Contributing to a project
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard to keep our commit history clear and consistent. Each commit message should start with a type that indicates the nature of the change, optionally followed by a scope and a brief description.
