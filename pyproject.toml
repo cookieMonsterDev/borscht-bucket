@@ -21,3 +21,10 @@ tag_format = "v{version}"
 line-length = 120
 target-version = ['py310']
 skip-string-normalization = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver"
+version_provider = "pep621"
+update_changelog_on_release = true

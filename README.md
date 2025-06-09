@@ -26,15 +26,15 @@ cd borscht-bucket
 2. Create and activate a virtual environment (optional but recommended):
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
+python3.12 -m venv env
+source .env/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
 ```
 
 3. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt ; pre-commit install --hook-type commit-msg
 ```
 
 4. Configure your `.env` file with required settings such as `ALLOW_ORIGINS`, `HOST_PATH`, `DIRECTORY_PATH`, `CHUNK_SIZE` e.g:
