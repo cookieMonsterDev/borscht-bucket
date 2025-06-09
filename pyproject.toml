@@ -14,7 +14,7 @@ uvicorn = {extras = ["standard"], version = "^0.34.2"}
 [tool.semantic_release]
 branch = "master"
 changelog_file = ""
-commit_message = "chore(release): {version} [skip ci]\n\n{changelog}"
+commit_message = "chore(release): {version} [skip ci]" 
 tag_format = "v{version}"
 first_release = true
 version_source = "tag"
