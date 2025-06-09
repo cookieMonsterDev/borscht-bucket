@@ -20,5 +20,4 @@ COPY . .
 
 EXPOSE 8001
 
-CMD ["fastapi", "run", "./src/main.py", "--port", "8001"]
-
+CMD ["fastapi", "run", "./app/main.py", "--port", "8001"]
