@@ -41,4 +41,4 @@ jobs:
           GIT_COMMITTER_NAME: semantic-release-bot
           GIT_COMMITTER_EMAIL: ci-bot@example.com
         run: |
-          semantic-release
+          semantic-release version
