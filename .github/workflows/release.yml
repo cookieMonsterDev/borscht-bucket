@@ -41,8 +41,4 @@ jobs:
           GIT_COMMITTER_NAME: semantic-release-bot
           GIT_COMMITTER_EMAIL: ci-bot@example.com
         run: |
-          # --- START MODIFICATION ---
-          # Changed from 'semantic-release publish' to just 'semantic-release'
-          # semantic-release will now use the config in pyproject.toml to create the tag
           semantic-release
-          # --- END MODIFICATION ---
