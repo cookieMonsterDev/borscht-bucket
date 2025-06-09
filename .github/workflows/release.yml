@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
   release:
@@ -28,19 +28,17 @@ jobs:
 
       - name: Configure Poetry (Optional, if using Poetry for project management)
         run: |
-          poetry config virtualenvs.create false 
+          poetry config virtualenvs.create false
 
       - name: Install project dependencies (using poetry)
         run: poetry install --no-root
 
-      - name: Run semantic-release
+      - name: Run semantic-release (to create tag only)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
           GIT_AUTHOR_NAME: semantic-release-bot
           GIT_AUTHOR_EMAIL: ci-bot@example.com
           GIT_COMMITTER_NAME: semantic-release-bot
           GIT_COMMITTER_EMAIL: ci-bot@example.com
-
         run: |
-          semantic-release publish
+          semantic-release
