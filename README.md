@@ -1,4 +1,10 @@
-# Borscht Bucket
+<p align="center">
+  <a href="https://github.com/cookieMonsterDev/borscht-bucket" target="blank">
+    <img src="./public/favicon-192x192.png" width="144" alt="Borscht Logo" />
+  </a>
+</p>
+
+<h1 align="center">Borscht Bucket</h1>
 
 This project is a FastAPI-based Media Serve for uploading and serving media files — videos, photos, and documents. That was created for fun))
 
