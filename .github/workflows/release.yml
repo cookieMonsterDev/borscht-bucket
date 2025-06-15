@@ -26,25 +26,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-          pip install python-semantic-release toml
+          pip install "python-semantic-release[toml]"
 
       - name: Configure Poetry (Optional, if using Poetry for project management)
-        run: |
-          poetry config virtualenvs.create false
+        run: poetry config virtualenvs.create false
 
       - name: Install project dependencies (using poetry)
         run: poetry install --no-root
 
-      - name: Set working directory
-        run: cd $GITHUB_WORKSPACE
-
-      - name: Run semantic-release (to create tag only)
+      - name: Run semantic-release (to update version, create tag, and commit)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: semantic-release-bot
           GIT_AUTHOR_EMAIL: ci-bot@example.com
           GIT_COMMITTER_NAME: semantic-release-bot
           GIT_COMMITTER_EMAIL: ci-bot@example.com
-        run: |
-          semantic-release version
+        run: semantic-release publish
