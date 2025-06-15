@@ -22,23 +22,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install build and release dependencies
+      - name: Install semantic-release
         run: |
           python -m pip install --upgrade pip
-          pip install poetry
-          pip install "python-semantic-release[toml]"
+          pip install python-semantic-release # No need for 'toml' extra if not updating pyproject.toml
 
-      - name: Configure Poetry (Optional, if using Poetry for project management)
-        run: poetry config virtualenvs.create false
-
-      - name: Install project dependencies (using poetry)
-        run: poetry install --no-root
-
-      - name: Run semantic-release (to update version, create tag, and commit)
+      - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: semantic-release-bot
           GIT_AUTHOR_EMAIL: ci-bot@example.com
           GIT_COMMITTER_NAME: semantic-release-bot
           GIT_COMMITTER_EMAIL: ci-bot@example.com
-        run: semantic-release publish
+        run: |
+          semantic-release version
