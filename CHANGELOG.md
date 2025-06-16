@@ -2,6 +2,32 @@
 
 <!-- version list -->
 
+## v1.1.0 (2025-06-16)
+
+### Documentation
+
+- Add license ([#10](https://github.com/cookieMonsterDev/borscht-bucket/pull/10),
+  [`377cd7b`](https://github.com/cookieMonsterDev/borscht-bucket/commit/377cd7b74a898377e8a3ccdcb349c91945730be0))
+
+- Update docs
+  ([`73fc1a1`](https://github.com/cookieMonsterDev/borscht-bucket/commit/73fc1a1ab4cdd629792c0955fe964bbde9095b3f))
+
+- Update workflow
+  ([`f3e5766`](https://github.com/cookieMonsterDev/borscht-bucket/commit/f3e5766c591e0c033bc9f0eeab78319734683db8))
+
+- Update workflow
+  ([`db59d21`](https://github.com/cookieMonsterDev/borscht-bucket/commit/db59d21c98361c674a448f37082e4048a921a095))
+
+- **logo**: Add Borscht logo ([#10](https://github.com/cookieMonsterDev/borscht-bucket/pull/10),
+  [`377cd7b`](https://github.com/cookieMonsterDev/borscht-bucket/commit/377cd7b74a898377e8a3ccdcb349c91945730be0))
+
+### Features
+
+- Add deleting files feature & remove utils
+  ([#11](https://github.com/cookieMonsterDev/borscht-bucket/pull/11),
+  [`03cd526`](https://github.com/cookieMonsterDev/borscht-bucket/commit/03cd526823b8c261697f47e04e34d4828d8ea8ba))
+
+
 ## v1.0.0 (2025-06-09)
 
 ### Documentation
