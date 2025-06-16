@@ -1,11 +1,12 @@
 import aiofiles
 from typing import Tuple
+from mimetypes import guess_type
 from constants import Directories
 from settings import get_settings
-from os.path import exists, getsize
 from exceptions import NotFoundException
+from os.path import join, exists, getsize
 from fastapi.responses import StreamingResponse
-from utils import generate_file_path, generate_file_media_type
+
 
 settings = get_settings()
 
@@ -42,14 +43,14 @@ def parse_range_header(range_header: str, file_size: int) -> Tuple[int, int]:
 
 
 async def get_video_by_slug(slug: str, range: str) -> StreamingResponse:
-    path = generate_file_path(slug, Directories.VIDEOS)
+    path = join(settings.directory_path, Directories.VIDEOS.value, slug)
 
     if not exists(path):
         raise NotFoundException(message="Video not found")
 
     file_size = getsize(path)
 
-    media_type = generate_file_media_type(path)
+    media_type = guess_type(path)[0] or "text/plain"
 
     start, end = parse_range_header(range, file_size)
 
@@ -61,8 +62,5 @@ async def get_video_by_slug(slug: str, range: str) -> StreamingResponse:
     }
 
     return StreamingResponse(
-        content=async_file_iterator(path, start, end),
-        status_code=206,
-        headers=headers,
-        media_type=media_type
+        content=async_file_iterator(path, start, end), status_code=206, headers=headers, media_type=media_type
     )

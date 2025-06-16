@@ -1,17 +1,21 @@
-from os.path import exists
+from os.path import join, exists
+from mimetypes import guess_type
+from settings import get_settings
 from constants import Directories
 from exceptions import NotFoundException
 from fastapi.responses import FileResponse
-from utils import generate_file_path, generate_file_media_type
+
+
+settings = get_settings()
 
 
 async def get_document_by_slug(slug: str) -> FileResponse:
-    path = generate_file_path(slug, Directories.DOCUMENTS)
+    path = join(settings.directory_path, Directories.DOCUMENTS.value, slug)
 
     if not exists(path):
         raise NotFoundException(message="Document not found")
 
-    media_type = generate_file_media_type(path)
+    media_type = guess_type(path)[0] or "text/plain"
 
     headers = {"Content-Disposition": f"attachment; filename={slug}"}
 
