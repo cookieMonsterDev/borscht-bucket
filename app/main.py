@@ -2,7 +2,7 @@ import exceptions
 from settings import get_settings
 from fastapi import FastAPI, Header, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from services import uploads, videos, photos, documents
+from services import files, videos, photos, documents
 
 app = FastAPI()
 
@@ -22,8 +22,8 @@ app.add_exception_handler(exceptions.RequestValidationError, exceptions.validati
 
 
 @app.post("/upload")
-async def upload(file: UploadFile):
-    return await uploads.upload_file(file)
+async def upload_file(file: UploadFile):
+    return await files.upload_file(file)
 
 
 @app.get("/videos/{slug}")
@@ -39,3 +39,8 @@ async def get_doucment(slug: str):
 @app.get("/documents/{slug}")
 async def get_doucment(slug: str):
     return await documents.get_document_by_slug(slug)
+
+
+@app.delete("/{directory}/{slug}")
+async def delete_file(directory: str, slug: str):
+    return await files.delete_file(directory, slug)
