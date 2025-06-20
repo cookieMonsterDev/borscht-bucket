@@ -55,7 +55,7 @@ async def optimize_video(path: str) -> None:
             stderr=DEVNULL,
         )
 
-        if result.returncode == 0:
+        if not result.returncode:
             remove(path)
             run(["mv", temp_path, path])
 

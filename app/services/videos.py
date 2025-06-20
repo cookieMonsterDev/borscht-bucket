@@ -27,12 +27,12 @@ async def async_file_iterator(path: str, start: int, end: int):
             remaining -= len(data)
 
 
-def parse_range_header(range: str, file_size: int) -> Tuple[int, int]:
-    if not range or not range.startswith("bytes="):
+def parse_range_header(range_header: str, file_size: int) -> Tuple[int, int]:
+    if not range_header or not range_header.startswith("bytes="):
         return 0, file_size - 1
 
     try:
-        range_values = range.replace("bytes=", "").split("-")
+        range_values = range_header.replace("bytes=", "").split("-")
 
         start = int(range_values[0]) if range_values[0] else 0
 
