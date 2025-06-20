@@ -18,6 +18,6 @@ class Settings(BaseSettings):
         return [origin.strip() for origin in self.origins.split(",") if origin.strip()]
 
 
-@lru_cache()
+# @lru_cache()
 def get_settings():
     return Settings()
