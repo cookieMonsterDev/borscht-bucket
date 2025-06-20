@@ -1,6 +1,7 @@
 import exceptions
 from typing import Annotated
 from settings import get_settings
+from typing import Annotated, Union
 from fastapi.middleware.cors import CORSMiddleware
 from services import files, videos, photos, documents
 from fastapi import FastAPI, Header, UploadFile, BackgroundTasks
@@ -28,8 +29,8 @@ async def upload_file(file: UploadFile, background_tasks: BackgroundTasks):
 
 
 @app.get("/videos/{slug}")
-async def get_video(slug: str, range: str = Header(None)):
-    return await videos.get_video_by_slug(slug, range)
+async def get_video(slug: str, range_header: Annotated[Union[str, None], Header(alias="Range")]):
+    return await videos.get_video_by_slug(slug, range_header)
 
 
 @app.get("/photos/{slug}")
