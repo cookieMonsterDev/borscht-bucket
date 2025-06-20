@@ -1,12 +1,13 @@
 from re import sub, UNICODE
 from datetime import datetime
-from fastapi import UploadFile
 from shutil import copyfileobj
 from os import makedirs, remove
 from mimetypes import guess_type
 from settings import get_settings
-from os.path import dirname, join, exists
+from subprocess import run, DEVNULL
 from fastapi.responses import JSONResponse
+from fastapi import UploadFile, BackgroundTasks
+from os.path import dirname, join, exists, splitext
 from exceptions import HTTPException, NotFoundException
 from constants import Directories, PhotoMediaTypes, VideoMediaTypes
 
@@ -37,7 +38,32 @@ def generate_file_url(directory: Directories, slug: str) -> str:
     return join(settings.host_path, directory, slug)
 
 
-async def upload_file(file: UploadFile) -> JSONResponse:
+async def optimize_video(path: str) -> None:
+    try:
+        media_type = guess_type(path)[0] or ""
+
+        if not media_type.startswith("video/"):
+            return
+
+        base, ext = splitext(path)
+
+        temp_path = f"{base}-temp{ext}"
+
+        result = run(
+            ["ffmpeg", "-i", path, "-c", "copy", "-movflags", "+faststart", "-y", temp_path],
+            stdout=DEVNULL,
+            stderr=DEVNULL,
+        )
+
+        if result.returncode == 0:
+            remove(path)
+            run(["mv", temp_path, path])
+
+    except OSError as error:
+        print(f"Error optimizing video: {error}")
+
+
+async def upload_file(file: UploadFile, background_tasks: BackgroundTasks) -> JSONResponse:
     slug = generate_file_slug(file.filename)
 
     directory = generate_file_directory_type(file.filename)
@@ -51,6 +77,9 @@ async def upload_file(file: UploadFile) -> JSONResponse:
     try:
         with open(path, 'wb') as buffer:
             copyfileobj(file.file, buffer)
+
+        background_tasks.add_task(optimize_video, path)
+
     except OSError as error:
         raise HTTPException(message=error.strerror)
 
