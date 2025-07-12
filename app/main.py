@@ -2,9 +2,10 @@ import exceptions
 from typing import Annotated
 from settings import get_settings
 from typing import Annotated, Union
+from fastapi import FastAPI, Header, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from services import files, videos, photos, documents
-from fastapi import FastAPI, Header, UploadFile, BackgroundTasks
+
 
 app = FastAPI()
 
@@ -24,8 +25,8 @@ app.add_exception_handler(exceptions.RequestValidationError, exceptions.validati
 
 
 @app.post("/upload")
-async def upload_file(file: UploadFile, background_tasks: BackgroundTasks):
-    return await files.upload_file(file, background_tasks)
+async def upload_file(file: UploadFile):
+    return await files.upload_file(file)
 
 
 @app.get("/videos/{slug}")
