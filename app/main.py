@@ -2,9 +2,10 @@ import exceptions
 from typing import Annotated
 from settings import get_settings
 from typing import Annotated, Union
+from fastapi import FastAPI, Header, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from services import files, videos, photos, documents
-from fastapi import FastAPI, Header, UploadFile, BackgroundTasks
+
 
 app = FastAPI()
 
