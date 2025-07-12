@@ -25,8 +25,8 @@ app.add_exception_handler(exceptions.RequestValidationError, exceptions.validati
 
 
 @app.post("/upload")
-async def upload_file(file: UploadFile):
-    return await files.upload_file(file)
+async def upload_file(file: UploadFile, background_tasks: BackgroundTasks):
+    return await files.upload_file(file, background_tasks)
 
 
 @app.get("/videos/{slug}")

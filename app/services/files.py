@@ -38,7 +38,32 @@ def generate_file_url(directory: Directories, slug: str) -> str:
     return join(settings.host_path, directory, slug)
 
 
-async def upload_file(file: UploadFile) -> JSONResponse:
+async def optimize_video(path: str) -> None:
+    try:
+        media_type = guess_type(path)[0] or ""
+
+        if not media_type.startswith("video/"):
+            return
+
+        base, ext = splitext(path)
+
+        temp_path = f"{base}-temp{ext}"
+
+        result = run(
+            ["ffmpeg", "-i", path, "-c", "copy", "-movflags", "+faststart", "-y", temp_path],
+            stdout=DEVNULL,
+            stderr=DEVNULL,
+        )
+
+        if not result.returncode:
+            remove(path)
+            run(["mv", temp_path, path])
+
+    except OSError as error:
+        print(f"Error optimizing video: {error}")
+
+
+async def upload_file(file: UploadFile, background_tasks: BackgroundTasks) -> JSONResponse:
     slug = generate_file_slug(file.filename)
 
     directory = generate_file_directory_type(file.filename)
