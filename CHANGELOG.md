@@ -2,6 +2,32 @@
 
 <!-- version list -->
 
+## v1.2.0 (2025-08-28)
+
+### Bug Fixes
+
+- Comments
+  ([`d91de3a`](https://github.com/cookieMonsterDev/borscht-bucket/commit/d91de3ac62a4ead9c5ef9c0ade747003170a91ae))
+
+- Uncomment lru_cache ([#13](https://github.com/cookieMonsterDev/borscht-bucket/pull/13),
+  [`397679a`](https://github.com/cookieMonsterDev/borscht-bucket/commit/397679a0e14ffd5cea625220e20d3c1a23f5c44d))
+
+- Uncomment lru_cache
+  ([`70600c0`](https://github.com/cookieMonsterDev/borscht-bucket/commit/70600c0aa4981a106661f230013b84136dfa3de9))
+
+### Features
+
+- Add optimizer queue ([#13](https://github.com/cookieMonsterDev/borscht-bucket/pull/13),
+  [`397679a`](https://github.com/cookieMonsterDev/borscht-bucket/commit/397679a0e14ffd5cea625220e20d3c1a23f5c44d))
+
+- Add video optimization & fix range header
+  ([#13](https://github.com/cookieMonsterDev/borscht-bucket/pull/13),
+  [`397679a`](https://github.com/cookieMonsterDev/borscht-bucket/commit/397679a0e14ffd5cea625220e20d3c1a23f5c44d))
+
+- Add video optimization & fix range header
+  ([`03c7615`](https://github.com/cookieMonsterDev/borscht-bucket/commit/03c7615be32c614495d727db8909570f0c34bfa3))
+
+
 ## v1.1.0 (2025-06-16)
 
 ### Documentation
