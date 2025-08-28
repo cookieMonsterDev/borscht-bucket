@@ -63,7 +63,7 @@ async def optimize_video(path: str) -> None:
         print(f"Error optimizing video: {error}")
 
 
-async def upload_file(file: UploadFile, background_tasks: BackgroundTasks) -> JSONResponse:
+async def upload_file(file: UploadFile) -> JSONResponse:
     slug = generate_file_slug(file.filename)
 
     directory = generate_file_directory_type(file.filename)
