@@ -9,4 +9,4 @@ services:
     env_file:
       - .env
     volumes:
-      - /files:/files
+      - /mnt/stuff/bucket:/mnt/stuff/bucket

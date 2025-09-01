@@ -30,17 +30,17 @@ async def upload_file(file: UploadFile):
 
 
 @app.get("/videos/{slug}")
-async def get_video(slug: str, range_header: Annotated[Union[str, None], Header(alias="Range")]):
+async def get_video(slug: str, range_header: str = Header(None, alias="Range")):
     return await videos.get_video_by_slug(slug, range_header)
 
 
 @app.get("/photos/{slug}")
-async def get_doucment(slug: str):
+async def get_photos(slug: str):
     return await photos.get_photo_by_slug(slug)
 
 
 @app.get("/documents/{slug}")
-async def get_doucment(slug: str):
+async def get_document(slug: str):
     return await documents.get_document_by_slug(slug)
 
 
