@@ -1,12 +1,13 @@
 services:
-  borscht-bucket:
+  bucket-api:
+    container_name: bucket-api
     build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: borscht-bucket
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: always
     ports:
-      - "8001:8001"
+      - "8002:8002"
     env_file:
-      - .env
+      - ./.env
     volumes:
       - /mnt/stuff/bucket:/mnt/stuff/bucket
