@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.0 (2025-09-02)
+
+### Features
+
+- Change router
+  ([`dcf7009`](https://github.com/cookieMonsterDev/borscht-bucket/commit/dcf70093ac7625f60bd3ef736fa02f9e5b6bc3d0))
+
+
 ## v1.2.0 (2025-08-28)
 
 ### Bug Fixes
